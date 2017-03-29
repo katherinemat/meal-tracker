@@ -7,19 +7,8 @@ import { Keg } from './keg.model';
   <h1>Tap Room</h1>
 
   <keg-list [childKegs]="masterKegs" (clickSender)="editKeg($event)"></keg-list>
-
-  <div *ngIf="selectedKeg">
-    <h3>Edit Keg</h3>
-    <label>Enter Keg Name:</label>
-    <input [(ngModel)]="selectedKeg.name">
-    <label>Enter Keg Brand:</label>
-    <input [(ngModel)]="selectedKeg.brand">
-    <label>Enter Pint Price:</label>
-    <input [(ngModel)]="selectedKeg.price">
-    <label>Enter Keg Alcohol Content:</label>
-    <input [(ngModel)]="selectedKeg.alcoholContent">
-    <button (click)="finishedEditing()">Done</button>
-  </div>
+  <hr>
+  <edit-keg [childSelectedKeg] = "selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
   `
 })
 

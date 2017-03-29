@@ -12,7 +12,7 @@ import { Keg } from './keg.model';
 })
 
 export class KegListComponent {
-@Input() childKeg: Keg[];
+@Input() childKegs: Keg[];
 @Output() clickSender = new EventEmitter();
 
 editKegClicked(kegToEdit: Keg) {
