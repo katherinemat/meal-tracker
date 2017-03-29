@@ -1,0 +1,32 @@
+$background: #3f3f3f;
+
+.expensive {
+  background-color: $background;
+}
+
+.normal {
+  background-color: #D3D3D3;
+}
+
+.cheap {
+  background-color: gray;
+}
+
+.weak {
+  font-weight: bold;
+}
+
+.strong {
+  font-style: italic;
+}
+
+button {
+  background-color: teal;
+  border-radius: 10%;
+  margin: 5px;
+}
+
+.jumbotron {
+  // background-color: red;
+  background-image: url("./images/taps.jpg");
+}
