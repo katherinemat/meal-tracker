@@ -1,0 +1,11 @@
+.expensive {
+  background-color: red;
+}
+
+.normal {
+  background-color: yellow;
+}
+
+.cheap {
+  background-color: green;
+}

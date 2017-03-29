@@ -11,7 +11,7 @@ import { Keg } from './keg.model';
 
   <ul>
   <!-- let is the same as var, just in small scope. "let keg of childKegs" is where we declare that keg is equal to each keg object in childKegs array -->
-    <li *ngFor="let keg of childKegs | remainingPints:filterByPints">{{keg.name}}, {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button></li>
+    <li [class]="priceColor(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints">{{keg.name}}, {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button><button (click)="sellLargeGrowler(keg)">Sell Large Growler</button></li>
   </ul>
   `
 })
@@ -19,6 +19,16 @@ import { Keg } from './keg.model';
 export class KegListComponent {
   @Input() childKegs: Keg[];
   @Output() clickSender = new EventEmitter();
+
+  priceColor(keg){
+    if(keg.price > 7) {
+      return "expensive";
+    } else if(keg.price > 4) {
+      return "normal";
+    } else {
+      return "cheap";
+    }
+  }
 
   editKegClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
@@ -31,6 +41,10 @@ export class KegListComponent {
 
   sellGrowler(kegToSell: Keg) {
     kegToSell.pints -= 2;
+  }
+
+  sellLargeGrowler(kegToSell: Keg) {
+    kegToSell.pints -= 4;
   }
 
   filterByPints: string = "allKegs";
