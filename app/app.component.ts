@@ -9,6 +9,8 @@ import { Keg } from './keg.model';
   <keg-list [childKegs]="masterKegs" (clickSender)="editKeg($event)"></keg-list>
   <hr>
   <edit-keg [childSelectedKeg] = "selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
+
+  <new-keg (newKegSender)="addKeg($event)"></new-keg>
   `
 })
 
@@ -29,5 +31,9 @@ export class AppComponent {
 
   finishedEditing() {
     this.selectedKeg = null;
+  }
+
+  addKeg(newKegFromChild: Keg) {
+    this.masterKegs.push(newKegFromChild);
   }
 }
