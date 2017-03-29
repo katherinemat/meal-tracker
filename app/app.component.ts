@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
+import { Keg } from './keg.model';
 
 @Component({
   selector: 'app-root',
   template: `
   <h1>Tap Room</h1>
-  <ul>
-    <li *ngFor="let keg of kegs">{{keg.name}}, {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}} <button (click)="editKeg(keg)">Edit keg</button></li>
-  </ul>
+
+  <keg-list></keg-list>
+
   <div *ngIf="selectedKeg">
     <h3>Edit Keg</h3>
     <label>Enter Keg Name:</label>
@@ -40,8 +41,4 @@ export class AppComponent {
   finishedEditing() {
     this.selectedKeg = null;
   }
-}
-
-export class Keg {
-  constructor(public name: string, public brand: string, public price: number, public alcoholContent: string) { }
 }
