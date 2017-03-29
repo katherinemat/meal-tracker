@@ -9,3 +9,11 @@
 .cheap {
   background-color: green;
 }
+
+.weak {
+  font-weight: bold;
+}
+
+.strong {
+  font-style: italic;
+}
