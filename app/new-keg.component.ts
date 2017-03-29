@@ -4,7 +4,6 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'new-keg',
   template:`
-  <h1>New Task</h1>
   <div>
     <div>
       <h3>New Keg</h3>
