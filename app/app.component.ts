@@ -6,7 +6,7 @@ import { Keg } from './keg.model';
   template: `
   <h1>Tap Room</h1>
 
-  <keg-list></keg-list>
+  <keg-list [childKegs]="masterKegs" (clickSender)="editKeg($event)"></keg-list>
 
   <div *ngIf="selectedKeg">
     <h3>Edit Keg</h3>
@@ -24,7 +24,7 @@ import { Keg } from './keg.model';
 })
 
 export class AppComponent {
-  kegs: Keg[] = [
+  masterKegs: Keg[] = [
     new Keg('Spacedust', 'Elysian', 6, '5.9'),
     new Keg('Otter Water', 'Philipsburg', 4, '4.5'),
     new Keg('Dawn Patrol', 'Aslan', 5, '7'),
