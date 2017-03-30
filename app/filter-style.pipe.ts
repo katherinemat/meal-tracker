@@ -16,6 +16,27 @@ export class FilterStylePipe implements PipeTransform {
         }
       }
       return output;
+    } else if(style === "Amber") {
+      for(var i = 0; i < input.length; i++) {
+        if (input[i].style === "Amber") {
+          output.push(input[i]);
+        }
+      }
+      return output;
+    } else if(style === "Lager") {
+      for(var i = 0; i < input.length; i++) {
+        if (input[i].style === "Lager") {
+          output.push(input[i]);
+        }
+      }
+      return output;
+    } else if(style === "Pilsner") {
+      for(var i = 0; i < input.length; i++) {
+        if (input[i].style === "Pilsner") {
+          output.push(input[i]);
+        }
+      }
+      return output;
     } else {
       return input;
     }

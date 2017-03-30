@@ -17,9 +17,9 @@ import { Keg } from './keg.model';
 export class AppComponent {
   masterKegs: Keg[] = [
     new Keg('Spacedust', 'Elysian', 'IPA', 6, '5.9'),
-    new Keg('Otter Water', 'Philipsburg', 'pilsner', 4, '4.5'),
+    new Keg('Otter Water', 'Philipsburg', 'Pilsner', 4, '4.5'),
     new Keg('Dawn Patrol', 'Aslan', 'Amber', 5, '7'),
-    new Keg('PBR', 'PBR', 'lager', 3, '2.5'),
+    new Keg('PBR', 'PBR', 'Lager', 3, '2.5'),
     new Keg('Moose Drool', 'Big Sky', 'Amber', 5, '5.3')
   ];
 

@@ -13,11 +13,13 @@ import { Keg } from './keg.model';
     <option value="allKegs" selected="selected">All Kegs</option>
     <option value="IPA">IPA</option>
     <option value="Amber">Amber</option>
+    <option value="Pilsner">Pilsner</option>
+    <option value="Lager">Lager</option>
   </select>
 
   <ul>
   <!-- let is the same as var, just in small scope. "let keg of childKegs" is where we declare that keg is equal to each keg object in childKegs array -->
-    <li [class]="kegStyle(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints | filterStyle:filterByStyle">{{keg.name}}, a {{keg.style}} beer: {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button><button (click)="sellLargeGrowler(keg)">Sell Large Growler</button></li>
+    <li [class]="kegStyle(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints | filterStyle:filterByStyle">{{keg.name}}, a {{keg.style}} beer: {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button><button (click)="happyHour(keg)">Put on happy hour</button></li>
   </ul>
   `
 })
@@ -58,8 +60,12 @@ export class KegListComponent {
     kegToSell.pints -= 2;
   }
 
-  sellLargeGrowler(kegToSell: Keg) {
-    kegToSell.pints -= 4;
+//TODO: modify this function to take a beer off happy hour also
+  happyHour(kegToSell: Keg) {
+    if (kegToSell.sale === false) {
+      kegToSell.price = kegToSell.price/2;
+      kegToSell.sale = true;
+    }
   }
 
   filterByPints: string = "allKegs";
