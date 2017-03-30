@@ -42,11 +42,13 @@ import { Keg } from './keg.model';
 
 export class KegListComponent {
   @Input() childKegs: Keg[];
+  @Input() happyHourString: string;
   //need to declare separate EventEmitter objects for each function/action because they need to be different variables (look inside the <keg-list> tag in the app component)
   @Output() clickSender = new EventEmitter();
   @Output() sellClickSender = new EventEmitter();
   @Output() growlClickSender = new EventEmitter();
   @Output() happyHourClickSender = new EventEmitter();
+  @Output() allHappyHourClickSender = new EventEmitter();
 
   kegStyle(keg){
     let kegClass = keg.name;
@@ -69,6 +71,8 @@ export class KegListComponent {
 
   editKegClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
+    var currentMinute = new Date().getMinutes();
+    console.log(currentMinute);
   }
 
 //this function is simple. basically, one keg object is passed in as an argument. all we have to do is adjust that keg object's pints value to itself minus one.
@@ -84,31 +88,8 @@ export class KegListComponent {
     this.happyHourClickSender.emit(happyHourKeg);
   }
 
-  happyHourString: string = "put all kegs on happy hour";
   allHappyHour() {
-    if(this.happyHourString === "put all kegs on happy hour") {
-      //change button text
-      this.happyHourString = "take all kegs off happy hour";
-      //this for loop loops through each keg in childKegs
-      for(var i = 0; i < this.childKegs.length; i ++) {
-        //if a keg is off happy hour, put it on happy hour
-        if (this.childKegs[i].happyHour === "put on happy hour") {
-          this.childKegs[i].price = this.childKegs[i].price/2;
-          this.childKegs[i].happyHour = "take off happy hour";
-        }
-      }
-    } else {
-      //change button text
-      this.happyHourString = "put all kegs on happy hour";
-      //this for loop loops through each keg in childKegs
-      for(var i = 0; i < this.childKegs.length; i ++) {
-        //if a keg is on happy hour, take it off happy hour
-        if (this.childKegs[i].happyHour === "take off happy hour") {
-          this.childKegs[i].price = this.childKegs[i].price*2;
-          this.childKegs[i].happyHour = "put on happy hour";
-        }
-      }
-    }
+    this.allHappyHourClickSender.emit();
   }
 
   filterByPints: string = "allKegs";

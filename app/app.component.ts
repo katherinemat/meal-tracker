@@ -6,7 +6,7 @@ import { Keg } from './keg.model';
   template: `
   <h1 class="title">Tap Room</h1>
 
-  <keg-list [childKegs]="masterKegs" (clickSender)="editKeg($event)" (sellClickSender)="sellPint($event)" (happyHourClickSender)="happyHour($event)" (growlClickSender)="sellGrowler($event)"></keg-list>
+  <keg-list [childKegs]="masterKegs" (clickSender)="editKeg($event)" (sellClickSender)="sellPint($event)" (happyHourClickSender)="happyHour($event)" (growlClickSender)="sellGrowler($event)" [happyHourString]="masterHappyHourString" (allHappyHourClickSender)="allHappyHour($event)"></keg-list>
   <hr>
   <edit-keg [childSelectedKeg] = "selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
 
@@ -44,6 +44,34 @@ export class AppComponent {
     } else {
       clickedKeg.price = clickedKeg.price*2;
       clickedKeg.happyHour = "put on happy hour";
+    }
+  }
+
+  masterHappyHourString: string = "put all kegs on happy hour";
+
+  allHappyHour() {
+    if(this.masterHappyHourString === "put all kegs on happy hour") {
+      //change button text
+      this.masterHappyHourString = "take all kegs off happy hour";
+      //this for loop loops through each keg in childKegs
+      for(var i = 0; i < this.masterKegs.length; i ++) {
+        //if a keg is off happy hour, put it on happy hour
+        if (this.masterKegs[i].happyHour === "put on happy hour") {
+          this.masterKegs[i].price = this.masterKegs[i].price/2;
+          this.masterKegs[i].happyHour = "take off happy hour";
+        }
+      }
+    } else {
+      //change button text
+      this.masterHappyHourString = "put all kegs on happy hour";
+      //this for loop loops through each keg in masterKegs
+      for(var i = 0; i < this.masterKegs.length; i ++) {
+        //if a keg is on happy hour, take it off happy hour
+        if (this.masterKegs[i].happyHour === "take off happy hour") {
+          this.masterKegs[i].price = this.masterKegs[i].price*2;
+          this.masterKegs[i].happyHour = "put on happy hour";
+        }
+      }
     }
   }
 
