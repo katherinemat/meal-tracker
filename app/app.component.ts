@@ -75,6 +75,16 @@ export class AppComponent {
     }
   }
 
+  ngOnInit(){
+    var current = this;
+    setInterval(function(){
+      var currentHour = new Date().getHours();
+      if(currentHour >= 17 && currentHour <= 19 && current.masterHappyHourString === "put all kegs on happy hour") {
+        current.allHappyHour();
+      }
+    }, 1000);
+  }
+
   finishedEditing() {
     this.selectedKeg = null;
   }

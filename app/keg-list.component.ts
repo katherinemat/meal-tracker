@@ -71,8 +71,6 @@ export class KegListComponent {
 
   editKegClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
-    var currentMinute = new Date().getMinutes();
-    console.log(currentMinute);
   }
 
 //this function is simple. basically, one keg object is passed in as an argument. all we have to do is adjust that keg object's pints value to itself minus one.
