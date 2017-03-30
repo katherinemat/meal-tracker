@@ -4,11 +4,14 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'keg-list',
   template: `
+  <h3>Filter by</h3>
+  <label>pints left</label>
   <select (change)="onChange($event.target.value)">
     <option value="allKegs" selected="selected">All Kegs</option>
     <option value="lessThanTen">Less than 10 pints left</option>
   </select>
 
+  <label>style</label>
   <select (change)="onStyleChange($event.target.value)">
     <option value="allKegs" selected="selected">All Kegs</option>
     <option value="IPA">IPA</option>
