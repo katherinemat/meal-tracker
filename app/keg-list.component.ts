@@ -19,7 +19,7 @@ import { Keg } from './keg.model';
 
   <ul>
   <!-- let is the same as var, just in small scope. "let keg of childKegs" is where we declare that keg is equal to each keg object in childKegs array -->
-    <li [class]="kegStyle(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints | filterStyle:filterByStyle">{{keg.name}}, a {{keg.style}} beer: {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button><button (click)="happyHour(keg)">Put on happy hour</button></li>
+    <li [class]="kegStyle(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints | filterStyle:filterByStyle">{{keg.name}}, a {{keg.style}} beer: {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button><button (click)="happyHour(keg)">{{keg.happyHour}}</button></li>
   </ul>
   `
 })
@@ -30,6 +30,7 @@ export class KegListComponent {
   @Output() clickSender = new EventEmitter();
   @Output() sellClickSender = new EventEmitter();
   @Output() growlClickSender = new EventEmitter();
+  @Output() happyHourClickSender = new EventEmitter();
 
   kegStyle(keg){
     let kegClass = "";
@@ -64,12 +65,8 @@ export class KegListComponent {
     this.growlClickSender.emit(growlToSell);
   }
 
-//TODO: modify this function to take a beer off happy hour also
-  happyHour(kegToSell: Keg) {
-    if (kegToSell.sale === false) {
-      kegToSell.price = kegToSell.price/2;
-      kegToSell.sale = true;
-    }
+  happyHour(happyHourKeg: Keg) {
+    this.happyHourClickSender.emit(happyHourKeg)
   }
 
   filterByPints: string = "allKegs";
