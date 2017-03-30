@@ -21,6 +21,7 @@ import { Keg } from './keg.model';
   <!-- let is the same as var, just in small scope. "let keg of childKegs" is where we declare that keg is equal to each keg object in childKegs array -->
     <li [class]="kegStyle(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints | filterStyle:filterByStyle">{{keg.name}}, a {{keg.style}} beer: {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button><button (click)="happyHour(keg)">{{keg.happyHour}}</button></li>
   </ul>
+  <button (click)="allHappyHour()">{{happyHourString}}</button>
   `
 })
 
@@ -58,7 +59,6 @@ export class KegListComponent {
 //this function is simple. basically, one keg object is passed in as an argument. all we have to do is adjust that keg object's pints value to itself minus one.
   sellPint(kegToSell: Keg) {
     this.sellClickSender.emit(kegToSell);
-    // kegToSell.pints -=1;
   }
 
   sellGrowler(growlToSell: Keg) {
@@ -67,6 +67,33 @@ export class KegListComponent {
 
   happyHour(happyHourKeg: Keg) {
     this.happyHourClickSender.emit(happyHourKeg)
+  }
+
+  happyHourString: string = "put all kegs on happy hour";
+  allHappyHour() {
+    if(this.happyHourString === "put all kegs on happy hour") {
+      //change button text
+      this.happyHourString = "take all kegs off happy hour";
+      //this for loop loops through each keg in childKegs
+      for(var i = 0; i < this.childKegs.length; i ++) {
+        //if a keg is off happy hour, put it on happy hour
+        if (this.childKegs[i].happyHour === "put on happy hour") {
+          this.childKegs[i].price = this.childKegs[i].price/2;
+          this.childKegs[i].happyHour = "take off happy hour";
+        }
+      }
+    } else {
+      //change button text
+      this.happyHourString = "put all kegs on happy hour";
+      //this for loop loops through each keg in childKegs
+      for(var i = 0; i < this.childKegs.length; i ++) {
+        //if a keg is on happy hour, take it off happy hour
+        if (this.childKegs[i].happyHour === "take off happy hour") {
+          this.childKegs[i].price = this.childKegs[i].price*2;
+          this.childKegs[i].happyHour = "put on happy hour";
+        }
+      }
+    }
   }
 
   filterByPints: string = "allKegs";
