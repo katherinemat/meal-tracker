@@ -24,8 +24,8 @@ import { Keg } from './keg.model';
       <br>
       <p>Brand: {{keg.brand}}</p>
       <p>Style: {{keg.style}}</p>
-      <p>Alcohol Content: {{keg.alcoholContent}}</p>
-      <p>Price: {{keg.price}}</p>
+      <p>Alcohol Content: {{keg.alcoholContent}}%</p>
+      <p>Price: \${{keg.price}}</p>
       <button class="btn"(click)="sellPint(keg)">Sell Pint</button>
       <button class="btn" (click)="sellGrowler(keg)">Sell Growler</button>
       <button class="btn" (click)="happyHour(keg)">{{keg.happyHour}}</button>
@@ -61,7 +61,6 @@ export class KegListComponent {
     } else if(alcoholNumber > 8) {
       kegClass = kegClass + " strong";
     }
-    console.log(kegClass);
     return kegClass;
   }
 
@@ -79,7 +78,7 @@ export class KegListComponent {
   }
 
   happyHour(happyHourKeg: Keg) {
-    this.happyHourClickSender.emit(happyHourKeg)
+    this.happyHourClickSender.emit(happyHourKeg);
   }
 
   happyHourString: string = "put all kegs on happy hour";

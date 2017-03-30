@@ -40,6 +40,7 @@ body {
   background-image: url("http://ftextures.com/textures/white-foam.jpg");
   background-position: center;
   background-size: cover;
+  margin-bottom: 100px;
 }
 
 .title {
@@ -50,6 +51,7 @@ body {
 }
 
 ul {
+  width: 100%;
   display: flex;
   list-style: none;
   flex-wrap: wrap;
@@ -57,6 +59,7 @@ ul {
   li {
     width: 32%;
     border: 2px solid white;
+    border-radius: 5%;
     margin: 50px 5px 50px 5px;
     padding: 2%;
     box-shadow: 20px 20px 10px #888888;
