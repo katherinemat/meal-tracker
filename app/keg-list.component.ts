@@ -9,9 +9,15 @@ import { Keg } from './keg.model';
     <option value="lessThanTen">Less than 10 pints left</option>
   </select>
 
+  <select (change)="onStyleChange($event.target.value)">
+    <option value="allKegs" selected="selected">All Kegs</option>
+    <option value="IPA">IPA</option>
+    <option value="Amber">Amber</option>
+  </select>
+
   <ul>
   <!-- let is the same as var, just in small scope. "let keg of childKegs" is where we declare that keg is equal to each keg object in childKegs array -->
-    <li [class]="kegStyle(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints">{{keg.name}}, {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button><button (click)="sellLargeGrowler(keg)">Sell Large Growler</button></li>
+    <li [class]="kegStyle(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints | filterStyle:filterByStyle">{{keg.name}}, a {{keg.style}} beer: {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button><button (click)="sellLargeGrowler(keg)">Sell Large Growler</button></li>
   </ul>
   `
 })
@@ -39,14 +45,6 @@ export class KegListComponent {
     return kegClass;
   }
 
-  // alcoholBold(keg){
-  //   //+ means parse int
-  //   let alcoholNumber = +keg.alcoholContent;
-  //   if(alcoholNumber < 4) {
-  //     return "weak";
-  //   }
-  //
-  // }
   editKegClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
   }
@@ -68,5 +66,11 @@ export class KegListComponent {
 
   onChange(optionFromMenu) {
     this.filterByPints = optionFromMenu;
+  }
+
+  filterByStyle: string = "allKegs";
+
+  onStyleChange(optionFromMenu) {
+    this.filterByStyle = optionFromMenu;
   }
 }
