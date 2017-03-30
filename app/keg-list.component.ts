@@ -26,7 +26,10 @@ import { Keg } from './keg.model';
 
 export class KegListComponent {
   @Input() childKegs: Keg[];
+  //need to declare separate EventEmitter objects for each function/action because they need to be different variables (look inside the <keg-list> tag in the app component)
   @Output() clickSender = new EventEmitter();
+  @Output() sellClickSender = new EventEmitter();
+  @Output() growlClickSender = new EventEmitter();
 
   kegStyle(keg){
     let kegClass = "";
@@ -53,11 +56,12 @@ export class KegListComponent {
 
 //this function is simple. basically, one keg object is passed in as an argument. all we have to do is adjust that keg object's pints value to itself minus one.
   sellPint(kegToSell: Keg) {
-    kegToSell.pints -=1;
+    this.sellClickSender.emit(kegToSell);
+    // kegToSell.pints -=1;
   }
 
-  sellGrowler(kegToSell: Keg) {
-    kegToSell.pints -= 2;
+  sellGrowler(growlToSell: Keg) {
+    this.growlClickSender.emit(growlToSell);
   }
 
 //TODO: modify this function to take a beer off happy hour also
