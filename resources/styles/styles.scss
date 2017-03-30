@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 $background: #3f3f3f;
 
 .expensive {
@@ -22,12 +23,49 @@ $background: #3f3f3f;
 
 button {
   background-color: teal;
-  border-radius: 10%;
   margin: 5px;
 }
 
 .jumbotron {
   // background-color: red;
-  background-image: url("https://static1.squarespace.com/static/53999bb8e4b0c9e64639e75c/t/53a9e703e4b0c4070a1c635a/1403643686849/casknkegtaphandles.jpg");
-  height: 400px;
+  background-image: url("/resources/images/taps.jpg");
+  height: 900px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 13px solid white;
+}
+
+body {
+  background-image: url("http://ftextures.com/textures/white-foam.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.title {
+  font-family: 'Permanent Marker', sans-serif;
+  font-size: 110px;
+  text-align: center;
+  text-shadow: 5px 5px white;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+
+  li {
+    width: 32%;
+    border: 2px solid white;
+    margin: 50px 5px 50px 5px;
+    padding: 2%;
+    box-shadow: 20px 20px 10px #888888;
+    .keg-name {
+      font-size: 30px;
+      font-family: 'Permanent Marker', sans-serif;
+    }
+    .edit-keg-button {
+      float: right;
+    }
+  }
 }

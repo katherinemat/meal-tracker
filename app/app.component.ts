@@ -4,7 +4,7 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'app-root',
   template: `
-  <h1>Tap Room</h1>
+  <h1 class="title">Tap Room</h1>
 
   <keg-list [childKegs]="masterKegs" (clickSender)="editKeg($event)" (sellClickSender)="sellPint($event)" (happyHourClickSender)="happyHour($event)" (growlClickSender)="sellGrowler($event)"></keg-list>
   <hr>

@@ -19,9 +19,21 @@ import { Keg } from './keg.model';
 
   <ul>
   <!-- let is the same as var, just in small scope. "let keg of childKegs" is where we declare that keg is equal to each keg object in childKegs array -->
-    <li [class]="kegStyle(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints | filterStyle:filterByStyle">{{keg.name}}, a {{keg.style}} beer: {{keg.alcoholContent}} from {{keg.brand}} - {{keg.price}}, {{keg.pints}} pints left<button (click)="editKegClicked(keg)">Edit keg</button><button (click)="sellPint(keg)">Sell Pint</button><button (click)="sellGrowler(keg)">Sell Growler</button><button (click)="happyHour(keg)">{{keg.happyHour}}</button></li>
+    <li [class]="kegStyle(keg)" *ngFor="let keg of childKegs | remainingPints:filterByPints | filterStyle:filterByStyle">
+      <span class="keg-name">{{keg.name}}</span>
+      <br>
+      <p>Brand: {{keg.brand}}</p>
+      <p>Style: {{keg.style}}</p>
+      <p>Alcohol Content: {{keg.alcoholContent}}</p>
+      <p>Price: {{keg.price}}</p>
+      <button class="btn"(click)="sellPint(keg)">Sell Pint</button>
+      <button class="btn" (click)="sellGrowler(keg)">Sell Growler</button>
+      <button class="btn" (click)="happyHour(keg)">{{keg.happyHour}}</button>
+      <p>Pints: {{keg.pints}}</p>
+      <button class="btn btn-sm edit-keg-button" (click)="editKegClicked(keg)">Edit keg</button>
+    </li>
   </ul>
-  <button (click)="allHappyHour()">{{happyHourString}}</button>
+  <button class="btn"(click)="allHappyHour()">{{happyHourString}}</button>
   `
 })
 
@@ -34,21 +46,22 @@ export class KegListComponent {
   @Output() happyHourClickSender = new EventEmitter();
 
   kegStyle(keg){
-    let kegClass = "";
+    let kegClass = keg.name;
     let alcoholNumber = +keg.alcoholContent;
 
     if(keg.price > 7) {
-      kegClass = "expensive";
+      kegClass = kegClass + " expensive";
     } else if(keg.price > 4) {
-      kegClass = "normal";
+      kegClass = kegClass + " normal";
     } else {
-      kegClass = "cheap";
+      kegClass = kegClass + " cheap";
     }
     if(alcoholNumber < 4) {
       kegClass = kegClass + " weak";
     } else if(alcoholNumber > 8) {
       kegClass = kegClass + " strong";
     }
+    console.log(kegClass);
     return kegClass;
   }
 
