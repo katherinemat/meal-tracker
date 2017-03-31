@@ -6,10 +6,11 @@ import { Meal } from './meal.model';
   template: `
   <h1>Meal Tracker</h1>
 
-  <meal-list [childMeals]="masterMeals"></meal-list>
+  <meal-list [childMeals]="masterMeals" (selectSender)="editMeal($event)"></meal-list>
 
   <new-meal (newMealSender)="addMeal($event)"></new-meal>
 
+  <edit-meal [childSelectedMeal]="selectedMeal" (editSender)="finishedEditing()"></edit-meal>
   `
 })
 
@@ -22,5 +23,16 @@ export class AppComponent {
 
   addMeal(newMeal: Meal) {
     this.masterMeals.push(newMeal);
+  }
+
+//edit Meal functions and variables
+  selectedMeal = null;
+
+  editMeal(clickedMeal) {
+    this.selectedMeal = clickedMeal;
+  }
+
+  finishedEditing() {
+    this.selectedMeal = null;
   }
 }
