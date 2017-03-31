@@ -5,14 +5,24 @@ import { Meal } from './meal.model';
   selector: 'edit-meal',
   template: `
   <div *ngIf="childSelectedMeal">
-    <h2>Edit Meal</h2>
-    <label>Meal Name:</label>
-    <input [(ngModel)]="childSelectedMeal.name">
-    <label>Meal Details:</label>
-    <input [(ngModel)]="childSelectedMeal.details">
-    <label>Meal Calories:</label>
-    <input [(ngModel)]="childSelectedMeal.calories">
-    <button (click)="finishedEditing()">Submit</button>
+    <div class="titles">
+      <h2>Edit Meal</h2>
+    </div>
+    <div class="form form-inline">
+      <div class="form-group">
+        <label>Meal Name:</label>
+        <input class="form-control" [(ngModel)]="childSelectedMeal.name">
+      </div>
+      <div class="form-group">
+        <label>Meal Details:</label>
+        <textarea class="form-control" [(ngModel)]="childSelectedMeal.details" maxlength="180"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Meal Calories:</label>
+        <input class="form-control" [(ngModel)]="childSelectedMeal.calories">
+      </div>
+      <img id="submit-new-meal" src="/resources/images/lips.png" (click)="finishedEditing()">
+    </div>
   </div>
   `
 })

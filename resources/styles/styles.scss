@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Coming+Soon|Megrim');
+$border: #d6d6d6;
+
+body {
+  margin-bottom: 100px;
+}
+
+.header {
+  font-family: 'Megrim', sans-serif;
+  background-color: #ffdbeb;
+  height: 200px;
+  h1 {
+    font-size: 100px;
+  }
+}
+
+.titles {
+  text-align: center;
+  font-family: 'Coming Soon', sans-serif;
+  letter-spacing: 10px;
+  padding: 70px 0px 40px 0px;
+  border-bottom: 1px dashed $border;
+}
+
+.form {
+  padding: 60px;
+}
+
+#filter {
+  text-align: right;
+  margin-right: 10%;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+
+  li {
+    width: 300px;
+    height: 300px;
+    padding: 2%;
+    margin: 8px;
+    border: 16px solid #ff3890;
+
+    .meal-name, .meal-calories {
+      font-family: 'Coming Soon', sans-serif;
+    }
+
+    .meal-name {
+      writing-mode: vertical-rl;
+      font-weight: bold;
+    }
+  }
+
+  li:hover {
+    cursor: pointer;
+    position: relative;
+    left: 1px;
+    box-shadow: 2px 2px 2px #ff3890;
+  }
+}
+
+#submit-new-meal {
+  height: 70px;
+}
+
+#submit-new-meal:hover {
+  cursor: pointer;
+  height: 71px;
+}

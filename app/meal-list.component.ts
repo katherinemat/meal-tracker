@@ -4,18 +4,31 @@ import { Meal } from './meal.model';
 @Component({
   selector: 'meal-list',
   template:`
-  <h2>All Meals</h2>
-  <h4>Filter meals</h4>
-  <!-- the event syntax is this way because its a select/dropdown form -->
-  <select (change)="filterChange($event.target.value)">
-    <option value="none" selected="selected">No filter</option>
-    <option value="less">Less than 500 calories</option>
-    <option value="more">500 or more calories</option>
-  </select>
+  <div class="titles">
+    <h2>My Meals</h2>
+  </div>
+
+  <div id="filter">
+    <h4>Filter meals</h4>
+    <!-- the event syntax is this way because its a select/dropdown form -->
+    <select (change)="filterChange($event.target.value)">
+      <option value="none" selected="selected">No filter</option>
+      <option value="less">Less than 500 calories</option>
+      <option value="more">500 or more calories</option>
+    </select>
+  </div>
 
   <ul>
-    <li *ngFor="let meal of childMeals | caloriesPipe:filterByCalories">{{meal.name}}, {{meal.calories}} calories: {{meal.details}}
-    <button (click)="editSelectedMeal(meal)">Edit this meal</button>
+    <li  (click)="editSelectedMeal(meal)" *ngFor="let meal of childMeals | caloriesPipe:filterByCalories">
+      <div class="row">
+        <div class="col-xs-7">
+          <p class="meal-details">{{meal.details}}</p>
+          <p class="meal-calories">{{meal.calories}} calories</p>
+        </div>
+        <div class="col-xs-5">
+          <h3 class="meal-name">{{meal.name}}</h3>
+        </div>
+      </div>
     </li>
   </ul>
   `
