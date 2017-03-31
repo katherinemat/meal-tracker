@@ -8,6 +8,8 @@ import { Meal } from './meal.model';
 
   <meal-list [childMeals]="masterMeals"></meal-list>
 
+  <new-meal (newMealSender)="addMeal($event)"></new-meal>
+
   `
 })
 
@@ -18,4 +20,7 @@ export class AppComponent {
     new Meal('ramen', 'I think my stomach is becoming much more sensitive because I cant even handle a bowl of ramen without getting a stomach ache. maybe too rich?', 780)
   ];
 
+  addMeal(newMeal: Meal) {
+    this.masterMeals.push(newMeal);
+  }
 }
